@@ -73,11 +73,11 @@ def test(ctx, targets=None, coverage=False, race=False, profile=False, use_embed
     fmt(ctx, targets=tool_targets, fail_on_fmt=fail_on_fmt)
     lint(ctx, targets=tool_targets)
     print("--- Vetting:")
-    vet(ctx, targets=tool_targets)
-    print("--- Misspelling:")
-    misspell(ctx, targets=tool_targets)
-    print("--- ineffassigning:")
-    ineffassign(ctx, targets=tool_targets)
+    #vet(ctx, targets=tool_targets)
+    #print("--- Misspelling:")
+    #misspell(ctx, targets=tool_targets)
+    #print("--- ineffassigning:")
+    #ineffassign(ctx, targets=tool_targets)
 
     with open(PROFILE_COV, "w") as f_cov:
         f_cov.write("mode: count")
