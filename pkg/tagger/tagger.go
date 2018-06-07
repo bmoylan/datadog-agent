@@ -222,8 +222,9 @@ func (t *Tagger) OutdatedTags(ADIdentifiers []string) bool {
 			// We might be trying to evaluate a EntityID that was removed
 			continue
 		}
-		if id.outdatedTags {
+		if id.outdatedTags && t.tagStore.store[ad].freshnessHash != "" {
 			log.Infof("Outdated tags")
+			t.tagStore.store[ad].outdatedTags = false
 			return true
 		}
 	}

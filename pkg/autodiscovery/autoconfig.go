@@ -524,7 +524,11 @@ func (ac *AutoConfig) collect(pd *providerDescriptor) (new, removed []integratio
 		}
 		// Check the freshness of c. Reschedule if necessary.
 		if tagger.OutdatedTags(c.ADIdentifiers) {
-			ac.reschedule(c)
+			log.Infof("Starting rescheduling for %s", c)
+			ac.processRemovedConfigs([]integration.Config{c})
+			log.Infof("Processed remove configs for %s", c)
+			new = append(new, c)
+			// ac.reschedule(c)
 		}
 	}
 	old := pd.configs
@@ -542,17 +546,17 @@ func (ac *AutoConfig) collect(pd *providerDescriptor) (new, removed []integratio
 }
 
 // reschedule is used when a check has started with a template that is not up to date anymore.
-func (ac *AutoConfig) reschedule(c integration.Config) {
-	log.Infof("Starting rescheduling for %s", c)
-	ac.processRemovedConfigs([]integration.Config{c})
-	log.Infof("Processed remove configs for %s", c)
-	resolvedConfigs := ac.resolve(c)
-	log.Infof("Resolved configs %s", resolvedConfigs)
-	checks := ac.getChecksFromConfigs(resolvedConfigs, true)
-	log.Infof("Preparing scheduling for %s", checks)
-	ac.schedule(checks)
-	log.Infof("Rescheduled the checks %s", checks)
-}
+//func (ac *AutoConfig) reschedule(c integration.Config) {
+//	log.Infof("Starting rescheduling for %s", c)
+//	ac.processRemovedConfigs([]integration.Config{c})
+//	log.Infof("Processed remove configs for %s", c)
+//	resolvedConfigs := ac.resolve(c)
+//	log.Infof("Resolved configs %s", resolvedConfigs)
+//	checks := ac.getChecksFromConfigs(resolvedConfigs, true)
+//	log.Infof("Preparing scheduling for %s", checks)
+//	ac.schedule(checks)
+//	log.Infof("Rescheduled the checks %s", checks)
+//}
 
 // getChecks takes a check configuration and returns a slice of Check instances
 // along with any error it might happen during the process
