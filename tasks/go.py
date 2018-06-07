@@ -108,7 +108,7 @@ def vet(ctx, targets, use_embedded_libs=False):
         "PKG_CONFIG_PATH": pkg_config_path(use_embedded_libs),
     }
 
-    ctx.run("go vet -tags \"{}\" ".format(" ".join(build_tags)) + " ".join(args), env=env)
+    ctx.run("go vet -v -tags \"{}\" ".format(" ".join(build_tags)) + " ".join(args), env=env)
     # go vet exits with status 1 when it finds an issue, if we're here
     # everything went smooth
     print("go vet found no issues")

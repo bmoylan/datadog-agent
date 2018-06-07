@@ -68,10 +68,10 @@ def test(ctx, targets=None, coverage=False, race=False, profile=False, use_embed
 
     # explicitly run these tasks instead of using pre-tasks so we can
     # pass the `target` param (pre-tasks are invoked without parameters)
-    print("--- Linting:")
-    lint_filenames(ctx)
-    fmt(ctx, targets=tool_targets, fail_on_fmt=fail_on_fmt)
-    lint(ctx, targets=tool_targets)
+    # print("--- Linting:")
+    # lint_filenames(ctx)
+    # fmt(ctx, targets=tool_targets, fail_on_fmt=fail_on_fmt)
+    # lint(ctx, targets=tool_targets)
     print("--- Vetting:")
     vet(ctx, targets=tool_targets)
     print("--- Misspelling:")
